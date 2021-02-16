@@ -5,8 +5,8 @@ import NotFound from './NotFound/NotFound'
 import Begin from './Begin/Begin'
 import Login from './auth/Login'
 import Register from './auth/Register'
+import AdminPost from './CreatePost/AdminPost'
 import CreatePost from './CreatePost/CreatePost'
-
 
 function Pages() {
     const  state= useContext(GlobalState)
@@ -17,7 +17,8 @@ function Pages() {
                 <Route path="/" exact component={Begin}></Route>
                 <Route path="/login" exact component={isLogged ? NotFound:Login}></Route>
                 <Route path="/register" exact component={isLogged ? NotFound : Register}></Route>
-                <Route path="/createpost" exact component={isLogged ? CreatePost:NotFound}></Route>
+                <Route path="/mypost/:id" exact component={isLogged ? AdminPost:NotFound}></Route>
+                <Route path="/create/post" exact component={isLogged ? CreatePost:NotFound}></Route>
                 <Route path="*" exact component={NotFound}></Route>
             </Switch>
         </div>

@@ -1,4 +1,4 @@
-import { useState,useEffect} from 'react'
+/* import { useState,useEffect} from 'react'
 import Axios from 'axios'
 
 function PostGeneralAPI() {
@@ -8,6 +8,7 @@ function PostGeneralAPI() {
         const getPosts=async()=>{
             const res=await Axios.get('/api/')
             setGolbalPosts(res.data.result)
+           
         }
         getPosts()
     },[])
@@ -18,3 +19,4 @@ function PostGeneralAPI() {
 }
 
 export default PostGeneralAPI
+ */

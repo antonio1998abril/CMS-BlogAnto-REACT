@@ -9,7 +9,7 @@ function Header() {
 
     const [isLogged]=state.userAPI.isLogged
    
-
+    const [userid]=state.userAPI.userid
 
     const logoutUser = async()=>{
         await Axios.get('/user/logout')
@@ -20,7 +20,7 @@ function Header() {
     const loggedRouter=()=>{
         return(
             <>
-                <li className="nav-item active"><Link className="nav-link" to="/createpost">Post</Link></li>
+                <li className="nav-item active"><Link className="nav-link" to={`/mypost/${userid}`}>Show/Create My Post</Link></li>
                 <li className="nav-item active"><Link className="nav-link" to="/" onClick={logoutUser}>Logout</Link></li>
             </>
         )

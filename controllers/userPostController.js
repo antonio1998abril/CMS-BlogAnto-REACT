@@ -4,9 +4,9 @@ const Post=require('../models/PostModel').Post
 module.exports={
     alluserpost:async(req,res)=>{
         try{
-            const iduser= req.body.id;
+            const iduser= req.params.id;
             const getpersonalposts= await Post.find({user:iduser}).lean()
-
+            .populate({path:'user',model:'user'})
             res.json({
                 status:'success',
                 result:getpersonalposts
@@ -18,21 +18,41 @@ module.exports={
     createuserpost:async(req,res)=>{
         const {title,description,content,user,images}=req.body
         const post= await Post.findOne({title})
+
         if (post){
             return res.status(400).json({msg:"This Post already exist"})
         }else{
             const newPost=new Post({
-                title,description,content,user,images
+                title,description,content,images,user
             })
             await newPost.save()
             res.json({msg:"You have created a new Post."})
         }
     },
-    updateuserpost:async(req,res)=>{
-
-    },
     deleteuserpost:async(req,res)=>{
-
+        
+        try{
+            await Post.findByIdAndDelete(req.params.id)
+            res.json({msg:"Post Deleted"})
+        }catch(err){
+            return res.status(500).json({msg:err.message})
+        }
+    },
+    updateuserpost:async(req,res)=>{
+        try{
+        const{title,description,content,user,images}=req.body
+        const post= await Post.findOne({title})
+        if(post){
+            return res.status(400).json({msg:"This Post already exist"})
+        }else{
+            const UpdatePost=new Post({
+                title,description,content,user,images
+            })
+            await UpdatePost.save()
+        }
+        }catch(err){
+            return res.status(500).json({msg:err.message})
+        }
     }
 
     

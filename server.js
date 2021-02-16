@@ -20,10 +20,13 @@ app.use(fileUpload({
 const userRoute=require('./routes/userRoute')
 const generalRoute=require('./routes/GeneralRoute')
 const userpost=require('./routes/userPostRoute')
+const uploadRoute=require('./routes/uploadimage')
 ////
 app.use('/user',userRoute)
+app.use('/api',uploadRoute)
 app.use('/api',generalRoute)
 app.use('/api',userpost)
+
 //conexion a la base de datos
 //
 //

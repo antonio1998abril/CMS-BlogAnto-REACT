@@ -2,8 +2,8 @@ import Axios from 'axios'
 import React, {createContext,useState,useEffect} from 'react'
 
 import UserAPI from './api/UserApi'
-import PostGeneralAPI from './api/PostGeneralAPI'
-import UserPostAPI from './api/UserPostAPI'
+
+
 
 export const GlobalState = createContext()
 
@@ -34,9 +34,8 @@ export const DataProvider=({children})=>{
         token:[token,setToken],
         userAPI:UserAPI(token),
         //general post
-        PostGeneralAPI:PostGeneralAPI(),
-        //Per User Post
-        UserPostAPI:UserPostAPI()
+ 
+        
 
     }
    

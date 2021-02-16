@@ -4,7 +4,7 @@ module.exports={
     GeneralGetPost:async(req,res)=>{
         try{
             const getgenralpost= await Post.find().lean()
-
+            .populate({path:'user',model:'user'})
             res.json({
                 status:'success',
                 result:getgenralpost

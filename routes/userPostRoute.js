@@ -1,12 +1,11 @@
 const router =require('express').Router()
-const userController = require('../controllers/userController')
 const UserPostController=require('../controllers/userPostController')
 
 
 
 
-router.get('/mypost',UserPostController.alluserpost)
+router.get('/allpost/:id',UserPostController.alluserpost)
 router.post('/mypost',UserPostController.createuserpost)
-
+router.delete('/delete/:id',UserPostController.deleteuserpost)
 
 module.exports=router

@@ -16,7 +16,8 @@ code {
 @import url("./components/headers/header.css");
 /* LOGIN */
 @import url("./components/mainpages/auth/Login.css");
-
+/* CREATE */
+@import url("./components/mainpages/CreatePost/CreatePost.css");
 
 @media (max-width: 500px){
   .App{
