@@ -40,16 +40,14 @@ module.exports={
     },
     updateuserpost:async(req,res)=>{
         try{
-        const{title,description,content,user,images}=req.body
-        const post= await Post.findOne({title})
-        if(post){
-            return res.status(400).json({msg:"This Post already exist"})
-        }else{
-            const UpdatePost=new Post({
-                title,description,content,user,images
-            })
-            await UpdatePost.save()
-        }
+        const{title,description,content,images}=req.body
+        await Post.findOneAndUpdate({_id:req.params.id},{
+            title,description,content,images
+        })
+        res.json({msg:"Updated"})
+      
+            
+        
         }catch(err){
             return res.status(500).json({msg:err.message})
         }

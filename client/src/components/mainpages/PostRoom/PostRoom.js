@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 
 function PostRoom({post}) {
     const stylecard={
@@ -15,7 +16,8 @@ function PostRoom({post}) {
             {post.content}
             </p>
     
-                <a href="#!" className="btn btn-primary">See</a>
+              {/*   <a href="#!" className="btn btn-primary">See</a> */}
+                <Link className="btn btn-primary" to={`/post/${post._id}`}>View</Link>
          
           
         </div>

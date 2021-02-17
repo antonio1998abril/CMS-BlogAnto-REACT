@@ -1,7 +1,7 @@
 import React, { useContext } from 'react'
 import { GlobalState } from '../../../GlobalState'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faTrash} from '@fortawesome/free-solid-svg-icons'
+import { faEdit, faTrash} from '@fortawesome/free-solid-svg-icons'
 import { Link} from 'react-router-dom'
 
 
@@ -37,13 +37,12 @@ function PostItem({post,deletepost}) {
                
                     {isUser ? (
                         <div>
-                    {/*         <a href="#!" className="btn btn-primary">See</a>&nbsp;
-                            <a href="#!" className="btn btn-warning">Update </a>&nbsp;
-                            <a href="#!" className="btn btn-danger">Delete</a> */}
-                            <Link to="#!" onClick={()=>deletepost(post._id,post.images.public_id)} className="btn btn-danger btn-flat "  >    
-                <i><FontAwesomeIcon icon={faTrash} /></i> 
-            </Link>
-
+                    <Link to="#!" onClick={()=>deletepost(post._id,post.images.public_id)} className="btn btn-danger btn-flat "  >    
+                        <i><FontAwesomeIcon icon={faTrash} /></i> 
+                    </Link>&nbsp;
+                    <Link className="btn bg-warning btn-flat" id="btn_view" to={`/edit/post/${post._id}`}>
+                        <i><FontAwesomeIcon icon={faEdit} /></i>
+                    </Link>               
                         </div>
                     ):(
                         <a href="#!" className="btn btn-primary">See</a>

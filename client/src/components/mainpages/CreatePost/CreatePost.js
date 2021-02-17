@@ -1,6 +1,6 @@
 import axios from 'axios'
-import React, { useContext, useState } from 'react'
-import { useHistory } from 'react-router-dom'
+import React, { useContext, useEffect, useState } from 'react'
+import { useHistory, useParams } from 'react-router-dom'
 import { GlobalState } from '../../../GlobalState'
 import Loading from '../utils/Loading/Loading'
 
@@ -17,29 +17,64 @@ function CreatePost() {
     const [post,setPost]=useState(initialState)
 
     const history = useHistory()
-    
-
     const handleChangeInput=e=>{
         const {name,value}=e.target
         setPost({...post,[name]:value})
     }
-
+/* agregar input el user id type="hdiden" */
     post.user=userid
 
     
     const handleSubmit=async e=>{
         e.preventDefault()
         try{
-            await axios.post('/api/mypost',{...post,images})
-            
+            if(onEdit){
+              await axios.put(`/api/update/${post._id}`,{...post,images})
+            }else{
+                await axios.post('/api/mypost',{...post,images})
+            }
+           
             history.push(`/mypost/${userid}`)
         }catch(err){
         alert(err.response.data.msg)
         }
     }
-    ///////////////////DELETE POST////////////////////
-    
-    ////////////////////DELETE POST/////////////////// 
+    ///////////////////UPDATE POST////////////////////
+    const [selfmypost,setmyPost]=useState([])
+
+    const params=useParams()
+    const [onEdit,setOnEdit] =useState(false)
+
+    useEffect(()=>{
+        const getPostuser=async(userid)=>{
+            try{
+                const getuser=await axios.get(`/api/allpost/${userid}`)
+                setmyPost(getuser.data.result)
+               
+            }catch(err){
+                alert(err.response.data.msg)
+            }
+        }
+            getPostuser(userid)
+        
+},[userid])
+
+        useEffect(()=>{
+            if(params.id){
+                setOnEdit(true)
+                selfmypost.forEach(post=>{
+                    if(post._id=== params.id){
+                        setPost(post)
+                        setImages(post.images)
+                    }
+                })
+            }else{
+                setOnEdit(false)
+                setPost(initialState)
+                setImages(false)
+            }
+        },[params.id,selfmypost])
+    ////////////////////UPDATE POST/////////////////// 
 
 
     ///////////////////IMAGE//////////////////////////
@@ -139,7 +174,7 @@ function CreatePost() {
                         </div>
                         
                         <div className="form-group">
-                            <button className=" btn btn-primary btn-lg  float-right button-create" type="submit"> {"Create"}</button>
+                            <button className=" btn btn-primary btn-lg  float-right button-create" type="submit"> { onEdit ?"Update":"Create"}</button>
                         </div>
 
                     </form>

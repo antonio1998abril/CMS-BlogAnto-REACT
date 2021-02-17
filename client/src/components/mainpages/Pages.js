@@ -8,6 +8,8 @@ import Register from './auth/Register'
 import AdminPost from './CreatePost/AdminPost'
 import CreatePost from './CreatePost/CreatePost'
 
+/* socket io */
+import PageRoom from './PostRoom/PageRoom'
 function Pages() {
     const  state= useContext(GlobalState)
     const [isLogged]=state.userAPI.isLogged
@@ -19,6 +21,8 @@ function Pages() {
                 <Route path="/register" exact component={isLogged ? NotFound : Register}></Route>
                 <Route path="/mypost/:id" exact component={isLogged ? AdminPost:NotFound}></Route>
                 <Route path="/create/post" exact component={isLogged ? CreatePost:NotFound}></Route>
+                <Route path="/edit/post/:id" exact component={isLogged ? CreatePost:NotFound}></Route>
+                <Route path="/post/:id" component={PageRoom} exact/>
                 <Route path="*" exact component={NotFound}></Route>
             </Switch>
         </div>

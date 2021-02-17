@@ -1,9 +1,11 @@
 import  { useState,useEffect } from 'react'
 import Axios from 'axios'
+
 /* import AdminPost from '../components/mainpages/CreatePost/AdminPost' */
 
 function UserApi(token) {
     const [isLogged,setIsLogged]=useState(false)
+    
     
 ///Para mandar datos de un componente a otro declaras el dato que ocupas
     const [userid,setuserid]=useState('')
@@ -31,7 +33,7 @@ function UserApi(token) {
 
 
 
-    
+    localStorage.setItem('userid',userid)
 
 
 

@@ -21,15 +21,95 @@ const userRoute=require('./routes/userRoute')
 const generalRoute=require('./routes/GeneralRoute')
 const userpost=require('./routes/userPostRoute')
 const uploadRoute=require('./routes/uploadimage')
+const commentRoute=require('./routes/commentRoute')
 ////
 app.use('/user',userRoute)
 app.use('/api',uploadRoute)
+app.use('/api',commentRoute)
 app.use('/api',generalRoute)
 app.use('/api',userpost)
 
+
+
+
+
+
+//////////////////////////////////////////SOCKET IO///////////////////////////////////////////////
+const Comments=require('./models/chatModel').Chat
+
+const http =require('http').createServer(app)
+const io = require('socket.io')(http)
+
+let users=[]
+io.on('connection',socket=>{
+    console.log(socket.id + ' connected.')
+
+    socket.on('joinRoom',id=>{
+        const user={userId:socket.id,room:id}
+        const check=users.every(user=>user.userId !== socket.id)
+        if (check){
+            users.push(user)
+            socket.join(user.room)
+        }else{
+            users.map(user=>{
+                if(user.userId === socket.id){
+                    if(user.room !== id){
+                        socket.leave(user.room)
+                        socket.join(id)
+                        user.room=id
+                    }
+                }
+            })
+        }
+        /* console.log(users)
+        console.log(socket.adapter.rooms) */
+    })
+
+    socket.on('createComment',async msg=>{
+        const {username,content,post_id,createdAt,rating,send}=msg
+        const newComment=new Comments({
+            username,content,post_id,createdAt,rating
+        })
+
+       /*  await newComment.save() */
+
+      /*   io.to(newComment.post_id).emit('sendCommentToClient',newComment) */
+
+      if(send === 'replyComment'){
+        const {_id, username, content, post_id, createdAt, rating} = newComment
+
+        const comment = await Comments.findById(post_id)
+
+        if(comment){
+            comment.reply.push({_id, username, content, createdAt, rating})
+
+            await comment.save()
+            io.to(comment.post_id).emit('sendReplyCommentToClient', comment)
+        }
+        }else{
+            await newComment.save()
+            io.to(newComment.post_id).emit('sendCommentToClient', newComment)
+        }
+    })
+
+    socket.on('disconnect',()=>{
+        console.log(socket.id+ 'disconnected')
+    })
+})
+
+/////////////////////////////////////////SOCKET IO///////////////////////////////////////////////7
+
+
+
+
+
+
+
+
+
 //conexion a la base de datos
-//
-//
+//MONGO DB
+//AQUI INICIA EL PROGRAMA
 const URI = process.env.MONGODB_URL
 mongoose.connect(URI, {
     useCreateIndex: true,

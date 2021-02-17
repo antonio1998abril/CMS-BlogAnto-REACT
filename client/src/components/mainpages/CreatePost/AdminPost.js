@@ -8,6 +8,8 @@ import add from '../../icon/add.svg'
 import { Link, useHistory ,useParams} from 'react-router-dom'
 import Loading from '../utils/Loading/Loading'
 
+
+
 function AdminPost() {
     const  state= useContext(GlobalState)
     const [token] =state.token
@@ -66,6 +68,7 @@ function AdminPost() {
 
 
 
+
 if(loading) return <div ><Loading/></div>
     return (
         <div className="row">
@@ -75,10 +78,11 @@ if(loading) return <div ><Loading/></div>
 
                <div className="post_page">
                     {   selfPost.map(post=>{
-                        return <PostItem key={post._id} post={post} deletepost={deletepost}/> })
+                        return <PostItem key={post._id} post={post} deletepost={deletepost} /> })
                     }
                </div>
-               
+         
+                      
                {/* BUTTON CREATE */}
                <div className="post_page">
                    <Link to="/create/post/"> 

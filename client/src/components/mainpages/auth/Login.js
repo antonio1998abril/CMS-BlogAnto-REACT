@@ -16,6 +16,7 @@ function Login() {
             await Axios.post('/user/login',{...user})
             localStorage.setItem('firstLogin',true)
             window.location.href="/";
+            localStorage.removeItem('userid')
         }catch(err){
             alert(err.response.data.msg)
         }
