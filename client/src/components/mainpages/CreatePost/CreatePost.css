@@ -6,9 +6,9 @@
     position: absolute;
     background-color:white;
     border: none;
-    margin-top: 50px;
+    margin-top: 80px;
     width: 260px;
-    margin-left: 50px;
+    margin-left: 100px;
     transition: width 1s, height 1s, transform 1s;
   
   }
@@ -16,6 +16,7 @@
     width: 260px;
     height: 260px;
     transform: rotate(182deg);
+    
   }
 
 

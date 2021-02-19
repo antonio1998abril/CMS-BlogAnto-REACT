@@ -71,26 +71,27 @@ function AdminPost() {
 
 if(loading) return <div ><Loading/></div>
     return (
+        <div className="container">
         <div className="row">
-            <div className="container">
+            
                
-               <br></br>
+          
 
-               <div className="post_page">
+          
                     {   selfPost.map(post=>{
                         return <PostItem key={post._id} post={post} deletepost={deletepost} /> })
                     }
-               </div>
+          
          
                       
                {/* BUTTON CREATE */}
-               <div className="post_page">
+            
                    <Link to="/create/post/"> 
                         <button className="addbutton">
                             <img alt="addpost" className="add" src={add}/>
                         </button>
                     </Link>
-                </div>
+                
                 {/* CREATE */}
 
 

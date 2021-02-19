@@ -1,4 +1,6 @@
 const Users=require('../models/UserModel').Users
+const Comment=require('../models/chatModel').Chat
+
 const bcrypt=require('bcrypt');
 const jwt=require('jsonwebtoken')
 process.env.SECRET_KEY='secret'
@@ -106,6 +108,34 @@ module.exports={
 
             if(!user)return res.status(400).json({msg:"User doe not exist"})
             res.json(user)
+
+        }catch(err){
+            return res.status(500).json({msg:err.message})
+        }
+    },
+    getCommentUser:async(req,res)=>{
+        try{
+            const userid= req.params.id
+            const usercomment =await Comment.find({setuserid:userid}).lean()
+            .populate({path:'user',model:'user'})
+            res.json({
+                status:'success',
+                result:usercomment
+            })
+        }catch(err){
+            return res.status(500).json({msg:err.message})
+        }
+    },
+    getRatingperuser:async(req,res)=>{
+        try{
+            const userid='60273806388adc456c58b85b'
+
+        const getratingpost=await Comment.find({post_id:req.params.id,setuserid:userid}).select('rating')
+        .populate({path:'user',model:'user'})
+        res.json({
+            status:'success',
+            result:getratingpost
+        })
 
         }catch(err){
             return res.status(500).json({msg:err.message})

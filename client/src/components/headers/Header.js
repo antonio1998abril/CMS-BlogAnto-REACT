@@ -4,6 +4,12 @@ import { Link } from 'react-router-dom'
 import Axios from 'axios'
 
 
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faSignInAlt,faClipboard,faSignOutAlt,faMap} from '@fortawesome/free-solid-svg-icons'
+
+
+
+
 function Header() {
     const state=useContext(GlobalState)
 
@@ -20,8 +26,8 @@ function Header() {
     const loggedRouter=()=>{
         return(
             <>
-                <li className="nav-item active"><Link className="nav-link" to={`/mypost/${userid}`}>Show/Create My Post</Link></li>
-                <li className="nav-item active"><Link className="nav-link" to="/" onClick={logoutUser}>Logout</Link></li>
+                <li className="nav-item active"><Link className="nav-link" to={`/mypost/${userid}`}><i><FontAwesomeIcon icon={faMap} /></i> Edit or Create New Posts</Link></li>
+                <li className="nav-item active"><Link className="nav-link" to="/" onClick={logoutUser}><i><FontAwesomeIcon icon={faSignOutAlt} /></i> Logout</Link></li>
             </>
         )
     }
@@ -29,9 +35,9 @@ function Header() {
     return (
 
  
-<nav className="navbar navbar-expand-lg navbar-light bg-light">
+<nav className="navbar navbar-expand-lg navbar-dark bg-dark ">
   
-  <Link className="navbar-brand" to="/">BlogAnto</Link>
+  <Link className="navbar-brand" to="/">Blog<i className="fab fa-autoprefixer"></i>nto</Link>
   <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
     <span className="navbar-toggler-icon"></span>
   </button>
@@ -40,8 +46,8 @@ function Header() {
       {isLogged ? loggedRouter(): 
       (
           <React.Fragment>
-               <li className="nav-item active"><Link className="nav-link" to="/login">Login</Link></li>
-               <li className="nav-item active"><Link className="nav-link" to="/Register">Register</Link></li>
+               <li className="nav-item active"><Link className="nav-link" to="/login"><i><FontAwesomeIcon icon={ faSignInAlt} /></i> Login</Link></li>
+               <li className="nav-item active"><Link className="nav-link" to="/Register"><i><FontAwesomeIcon icon={faClipboard} /></i> Register</Link></li>
           </React.Fragment>
         )
       }    

@@ -24,6 +24,16 @@ const postSchema=new Schema({
         type:Schema.Types.ObjectId,
         ref:'user'
     },
+    rating:{
+        type:Number,
+        default:0,
+        required:true
+    },
+    numReviews:{
+        type:Number,
+        required:true,
+        default:0
+    },
     images:{
         type:Object,
         required:true

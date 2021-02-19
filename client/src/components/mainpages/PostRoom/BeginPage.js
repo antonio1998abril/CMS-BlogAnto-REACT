@@ -1,13 +1,14 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 
-function PostRoom({post}) {
+function BeginPage({post}) {
     const stylecard={
-        width:'21rem'
+        width:'18rem'
     }
 
     return (
-        <div className="card"  style={stylecard}/* Style="width: 21rem;" */>
+  
+        <div className="card begincarg"  style={stylecard}/* Style="width: 21rem;" */>
         <img src={post.images.url} className="card-img-top" alt="..."
         />
         <div className="card-body">
@@ -22,7 +23,8 @@ function PostRoom({post}) {
           
         </div>
     </div>
+    
     )
 }
 
-export default PostRoom
+export default BeginPage

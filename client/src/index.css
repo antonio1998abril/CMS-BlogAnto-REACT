@@ -30,3 +30,6 @@ code {
 
  
 }
+
+/* Socket io */
+@import url('./components/mainpages/PostRoom/DetailPost.css');

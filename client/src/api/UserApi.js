@@ -9,8 +9,8 @@ function UserApi(token) {
     
 ///Para mandar datos de un componente a otro declaras el dato que ocupas
     const [userid,setuserid]=useState('')
-
-/* GL */
+    const [username,setUsername]=useState('')
+/* GLOBAL */
     useEffect(()=>{
         if(token){
             const getUser =async()=>{
@@ -21,6 +21,7 @@ function UserApi(token) {
                     setIsLogged(true)
              ///guardas la respues qui
                     setuserid(getdata.data._id)
+                    setUsername(getdata.data.name)
                     
                 }catch(err){
                     alert(err.response.data.msg)
@@ -32,8 +33,9 @@ function UserApi(token) {
     },[token])
 
 
-
+/////////localstorage no lo necesito XD
     localStorage.setItem('userid',userid)
+    localStorage.setItem('name',username)
 
 
 

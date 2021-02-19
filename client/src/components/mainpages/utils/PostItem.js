@@ -1,7 +1,7 @@
 import React, { useContext } from 'react'
 import { GlobalState } from '../../../GlobalState'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faEdit, faTrash} from '@fortawesome/free-solid-svg-icons'
+import { faEdit, faTrash,faArrowAltCircleRight} from '@fortawesome/free-solid-svg-icons'
 import { Link} from 'react-router-dom'
 
 
@@ -13,7 +13,7 @@ function PostItem({post,deletepost}) {
     var isUser=false
 
     const stylecard={
-        width:'21rem'
+        width:'30rem'
     }
 
 
@@ -26,7 +26,7 @@ function PostItem({post,deletepost}) {
 
     return (
      
-            <div className="card"  style={stylecard}/* Style="width: 21rem;" */>
+            <div className="card postcard"  style={stylecard}/* Style="width: 21rem;" */>
                 <img src={post.images.url} className="card-img-top" alt="..."
                 />
                 <div className="card-body">
@@ -42,7 +42,10 @@ function PostItem({post,deletepost}) {
                     </Link>&nbsp;
                     <Link className="btn bg-warning btn-flat" id="btn_view" to={`/edit/post/${post._id}`}>
                         <i><FontAwesomeIcon icon={faEdit} /></i>
-                    </Link>               
+                    </Link>&nbsp;
+                    <Link className="btn bg-info btn-flat" id="btn_view" to={`/post/${post._id}`}>
+                        <i><FontAwesomeIcon icon={faArrowAltCircleRight} /></i>
+                    </Link>             
                         </div>
                     ):(
                         <a href="#!" className="btn btn-primary">See</a>

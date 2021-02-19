@@ -22,6 +22,11 @@ const ChatSchema = new Schema({
     },
     reply:{
         type:Array
+    },
+    setuserid:{
+        type:Schema.Types.ObjectId,
+        ref:'user',
+        required:false
     }
 }, {
     timestamps:true

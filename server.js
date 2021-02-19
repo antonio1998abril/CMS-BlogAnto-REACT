@@ -1,3 +1,4 @@
+require('dotenv').config()
 const express=require('express')
 const app=express()
 const mongoose=require('mongoose')
@@ -7,10 +8,11 @@ const cookieParser =require('cookie-parser')
 const fileUpload = require('express-fileupload')
 
 const path =require('path')
-require('dotenv').config()
+
 
 app.use(bodyParser.urlencoded({extended:true}));
 app.use(bodyParser.json());
+app.use(express.json())
 app.use(cookieParser())
 app.use(cors())
 app.use(fileUpload({
@@ -66,9 +68,9 @@ io.on('connection',socket=>{
     })
 
     socket.on('createComment',async msg=>{
-        const {username,content,post_id,createdAt,rating,send}=msg
+        const {username,content,post_id,createdAt,rating,send,setuserid}=msg
         const newComment=new Comments({
-            username,content,post_id,createdAt,rating
+            username,content,post_id,createdAt,rating,setuserid
         })
 
        /*  await newComment.save() */
@@ -76,12 +78,12 @@ io.on('connection',socket=>{
       /*   io.to(newComment.post_id).emit('sendCommentToClient',newComment) */
 
       if(send === 'replyComment'){
-        const {_id, username, content, post_id, createdAt, rating} = newComment
+        const {_id, username, content, post_id, createdAt, rating,setuserid} = newComment
 
         const comment = await Comments.findById(post_id)
 
         if(comment){
-            comment.reply.push({_id, username, content, createdAt, rating})
+            comment.reply.push({_id, username, content, createdAt, rating,setuserid})
 
             await comment.save()
             io.to(comment.post_id).emit('sendReplyCommentToClient', comment)
@@ -129,6 +131,6 @@ if(process.env.NODE_ENV === 'production'){
 }
 //Run server
 const PORT = process.env.PORT || 5000
-app.listen(PORT, () =>{
+http.listen(PORT, () =>{
     console.log('Server is running on port', PORT)
 })

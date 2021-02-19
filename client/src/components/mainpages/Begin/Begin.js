@@ -1,38 +1,29 @@
-import axios from 'axios'
-import React, {useEffect, useState} from 'react'
-
-
-import PostRoom from '../PostRoom/PostRoom'
+import React, { useEffect, useState} from 'react'
+import { getData } from '../FetchData'
+import BeginPage from '../PostRoom/BeginPage'
 //AQUI MANDE EL VALOR DEL ID DEL USUARIO
 function Begin() {
     const [selfPost,setSelfPost]=useState([])
 
     useEffect(()=>{
-        const getPostuser=async()=>{
-            try{
-                const res=await axios.get('/api/')
-                setSelfPost(res.data.result)
-               
-            }catch(err){
-                alert(err.response.data.msg)
-            }
-        }
-            getPostuser()
-        
+       
+        getData('/api/')
+        .then(res=> setSelfPost(res.data.result))
+        .catch(err=>console.log(err.response.data.msg))
 },[])
-   
-  
+
 
     return (
         <>
-        <br></br>
-        <div className="container">
-        <div className="post_page">
+ 
+ <div className="container">
+  <div className="row">
+      
      { selfPost.map(post=>{
-            return <PostRoom key={post._id} post={post}/> })
+            return <BeginPage key={post._id} post={post}/> })
      }
-     
-        </div>
+     </div>
+        
         </div>
         </>
     )

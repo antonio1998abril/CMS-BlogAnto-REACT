@@ -9,4 +9,6 @@ router.get('/logout',userController.logout)
 router.get('/refresh_token',userController.refreshToken)
 router.get('/infor',auth,userController.getUser)
 
+router.get('/allmycomments/:id',userController.getCommentUser)
+router.get('/perating/:id',userController.getRatingperuser)
 module.exports=router

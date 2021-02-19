@@ -17,6 +17,7 @@ function Login() {
             localStorage.setItem('firstLogin',true)
             window.location.href="/";
             localStorage.removeItem('userid')
+            localStorage.removeItem('name')
         }catch(err){
             alert(err.response.data.msg)
         }
