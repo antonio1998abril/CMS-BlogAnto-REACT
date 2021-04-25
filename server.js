@@ -69,6 +69,7 @@ io.on('connection',socket=>{
 
     socket.on('createComment',async msg=>{
         const {username,content,post_id,createdAt,rating,send,setuserid}=msg
+        console.log(msg)
         const newComment=new Comments({
             username,content,post_id,createdAt,rating,setuserid
         })

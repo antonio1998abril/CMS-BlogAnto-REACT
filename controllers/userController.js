@@ -12,7 +12,7 @@ module.exports={
             const user=await Users.findOne({email});
 
             if(user)
-                return res.status(400),json({msg:"The email already exist"})
+                return res.status(400).json({msg:"The email already exist"})
             
             if(password.length<6)
                 return res.status(400).json({msg:"Password is at leadt 6 characters long"})
@@ -128,9 +128,11 @@ module.exports={
     },
     getRatingperuser:async(req,res)=>{
         try{
-            const userid='60273806388adc456c58b85b'
-
-        const getratingpost=await Comment.find({post_id:req.params.id,setuserid:userid}).select('rating')
+            const header=req.header("User")
+            const vari=JSON.stringify(header)
+      
+       const userid = vari.replace(/"/g, "");
+        const getratingpost=await Comment.findOne({post_id:req.params.id,setuserid:userid}).select('rating')
         .populate({path:'user',model:'user'})
         res.json({
             status:'success',

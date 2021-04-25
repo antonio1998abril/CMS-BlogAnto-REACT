@@ -19,8 +19,6 @@ function BeginPage({post}) {
     
               {/*   <a href="#!" className="btn btn-primary">See</a> */}
                 <Link className="btn btn-primary" to={`/post/${post._id}`}>View</Link>
-         
-          
         </div>
     </div>
     

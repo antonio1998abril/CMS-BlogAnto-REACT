@@ -26,25 +26,26 @@ const setuserid=localStorage.getItem('userid')
 
 
     const commentSubmit=()=>{
-        let username=nameRef.current.value
-      if(!username.trim()) username=loggedname
-   
+    let username=nameRef.current.value
+    if(!username.trim()) username=loggedname
     if(!username.trim()) return alert('Empty Name')
-       
-    
-      
-        const content=contentRef.current.innerHTML
+    const content=contentRef.current.innerHTML
 
     /*     if(!username.trim()) return alert('Empty Name') */
-        if(contentRef.current.textContent.trim().length<10)
+        if(contentRef.current.textContent.trim().length<5)
             return alert('Contents too short,must be at leats 10 character')
 
         const createdAt=new Date().toISOString()
+        if(setuserid.length){
+            socket.emit('createComment', {
+                username, content, post_id: id, createdAt, rating, send,setuserid
+            })
+        }else{
+            socket.emit('createComment', {
+                username, content, post_id: id, createdAt, rating, send
+            })
 
-        socket.emit('createComment', {
-            username, content, post_id: id, createdAt, rating, send,setuserid
-        })
-
+        }
         if(rating && rating !== 0){
             patchData(`/api/post/${id}`,{rating})
             .then(res=>console.log(res))
@@ -60,7 +61,7 @@ const setuserid=localStorage.getItem('userid')
 
     return (
         <div className="form_input">
-               <p>Name</p>
+               <p>Name: </p>
             {   isLogged ?  (
                 <div>
                  <h4>{loggedname}</h4> 

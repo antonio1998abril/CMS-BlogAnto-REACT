@@ -1,9 +1,7 @@
 import React from 'react'
 import './Rating.css'
-
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faStar} from '@fortawesome/free-solid-svg-icons'
-
 
 let rate = 0;
 function Rating({props}) {

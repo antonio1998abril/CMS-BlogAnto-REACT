@@ -19,7 +19,7 @@ function AdminPost() {
     const history=useHistory()
     const [loading,setLoading]=useState(false)
     const [callback,setCallback]=useState(false)
-
+///Find all post about user
     const { id } = useParams();
 
    

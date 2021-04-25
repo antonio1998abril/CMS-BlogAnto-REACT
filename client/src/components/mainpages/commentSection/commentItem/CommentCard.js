@@ -4,11 +4,12 @@ import moment from 'moment'
 import './commentCard.css'
 
 function CommentCard({children, comment}) {
+   
     return (
         <div className="comment_card">
             <div className="comment_card_row">
                 <h3>{comment.username}</h3>
-              
+ 
                 {
                     comment.rating !== 0 && <Rating props={comment} />
                 }

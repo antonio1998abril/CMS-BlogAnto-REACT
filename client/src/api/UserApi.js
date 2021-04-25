@@ -16,8 +16,9 @@ function UserApi(token) {
             const getUser =async()=>{
                 try{ 
          const getdata= await Axios.get('/user/infor', {
-                        headers: {Authorization: token}  
+                        headers: {Authorization: token}
                     })
+                    
                     setIsLogged(true)
              ///guardas la respues qui
                     setuserid(getdata.data._id)
@@ -31,7 +32,7 @@ function UserApi(token) {
         }
           
     },[token])
-
+ 
 
 /////////localstorage no lo necesito XD
     localStorage.setItem('userid',userid)

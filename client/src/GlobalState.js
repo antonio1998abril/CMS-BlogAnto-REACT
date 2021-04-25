@@ -51,10 +51,10 @@ export const DataProvider=({children})=>{
     const state={
         token:[token,setToken],
         userAPI:UserAPI(token),
+   
         //socletio
         post:[GlobalPosts,setGolbalPosts],
         socket
-      
     }
    
     return(
